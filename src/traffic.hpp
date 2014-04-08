@@ -41,7 +41,7 @@ protected:
 public:
   virtual ~TrafficPattern() {}
   virtual void reset();
-  virtual int dest(int source) = 0;
+  virtual int dest(int source,int cl=0) = 0;
   static TrafficPattern * New(string const & pattern, int nodes, 
 			      Configuration const * const config = NULL);
 };
@@ -59,7 +59,7 @@ protected:
 class BitCompTrafficPattern : public BitPermutationTrafficPattern {
 public:
   BitCompTrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class TransposeTrafficPattern : public BitPermutationTrafficPattern {
@@ -67,19 +67,19 @@ protected:
   int _shift;
 public:
   TransposeTrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class BitRevTrafficPattern : public BitPermutationTrafficPattern {
 public:
   BitRevTrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class ShuffleTrafficPattern : public BitPermutationTrafficPattern {
 public:
   ShuffleTrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class DigitPermutationTrafficPattern : public PermutationTrafficPattern {
@@ -93,13 +93,13 @@ protected:
 class TornadoTrafficPattern : public DigitPermutationTrafficPattern {
 public:
   TornadoTrafficPattern(int nodes, int k, int n, int xr = 1);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class NeighborTrafficPattern : public DigitPermutationTrafficPattern {
 public:
   NeighborTrafficPattern(int nodes, int k, int n, int xr = 1);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class RandomPermutationTrafficPattern : public TrafficPattern {
@@ -108,7 +108,7 @@ private:
   inline void randomize(int seed);
 public:
   RandomPermutationTrafficPattern(int nodes, int seed);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class RandomTrafficPattern : public TrafficPattern {
@@ -119,7 +119,7 @@ protected:
 class UniformRandomTrafficPattern : public RandomTrafficPattern {
 public:
   UniformRandomTrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class UniformBackgroundTrafficPattern : public RandomTrafficPattern {
@@ -127,37 +127,37 @@ private:
   set<int> _excluded;
 public:
   UniformBackgroundTrafficPattern(int nodes, vector<int> excluded_nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class DiagonalTrafficPattern : public RandomTrafficPattern {
 public:
   DiagonalTrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class AsymmetricTrafficPattern : public RandomTrafficPattern {
 public:
   AsymmetricTrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class Taper64TrafficPattern : public RandomTrafficPattern {
 public:
   Taper64TrafficPattern(int nodes);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class BadPermDFlyTrafficPattern : public DigitPermutationTrafficPattern {
 public:
   BadPermDFlyTrafficPattern(int nodes, int k, int n);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class BadPermYarcTrafficPattern : public DigitPermutationTrafficPattern {
 public:
   BadPermYarcTrafficPattern(int nodes, int k, int n, int xr = 1);
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
 };
 
 class HotSpotTrafficPattern : public TrafficPattern {
@@ -168,7 +168,14 @@ private:
 public:
   HotSpotTrafficPattern(int nodes, vector<int> hotspots, 
 			vector<int> rates = vector<int>());
-  virtual int dest(int source);
+  virtual int dest(int source,int cl=0);
+};
+
+class CustomizedTrafficPattern: public TrafficPattern {
+private:
+public:
+    CustomizedTrafficPattern(int nodes);
+    virtual int dest(int source,int cl=0);
 };
 
 #endif

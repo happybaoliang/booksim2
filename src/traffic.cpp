@@ -190,6 +190,8 @@ TrafficPattern * TrafficPattern::New(string const & pattern, int nodes,
       rates.resize(hotspots.size(), 1);
     }
     result = new HotSpotTrafficPattern(nodes, hotspots, rates);
+  } else if(pattern_name == "customizedpattern") {
+    result=new CustomizedTrafficPattern(nodes);
   } else {
     cout << "Error: Unknown traffic pattern: " << pattern << endl;
     exit(-1);
@@ -219,7 +221,7 @@ BitCompTrafficPattern::BitCompTrafficPattern(int nodes)
   
 }
 
-int BitCompTrafficPattern::dest(int source)
+int BitCompTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   int const mask = _nodes - 1;
@@ -240,7 +242,7 @@ TransposeTrafficPattern::TransposeTrafficPattern(int nodes)
   _shift >>= 1;
 }
 
-int TransposeTrafficPattern::dest(int source)
+int TransposeTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   int const mask_lo = (1 << _shift) - 1;
@@ -254,7 +256,7 @@ BitRevTrafficPattern::BitRevTrafficPattern(int nodes)
   
 }
 
-int BitRevTrafficPattern::dest(int source)
+int BitRevTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   int result = 0;
@@ -271,7 +273,7 @@ ShuffleTrafficPattern::ShuffleTrafficPattern(int nodes)
 
 }
 
-int ShuffleTrafficPattern::dest(int source)
+int ShuffleTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   int const shifted = source << 1;
@@ -291,7 +293,7 @@ TornadoTrafficPattern::TornadoTrafficPattern(int nodes, int k, int n, int xr)
 
 }
 
-int TornadoTrafficPattern::dest(int source)
+int TornadoTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
 
@@ -312,7 +314,7 @@ NeighborTrafficPattern::NeighborTrafficPattern(int nodes, int k, int n, int xr)
 
 }
 
-int NeighborTrafficPattern::dest(int source)
+int NeighborTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
 
@@ -363,7 +365,7 @@ void RandomPermutationTrafficPattern::randomize(int seed)
   RestoreRandomState(save_x, save_u); 
 }
 
-int RandomPermutationTrafficPattern::dest(int source)
+int RandomPermutationTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   assert((_dest[source] >= 0) && (_dest[source] < _nodes));
@@ -382,7 +384,7 @@ UniformRandomTrafficPattern::UniformRandomTrafficPattern(int nodes)
 
 }
 
-int UniformRandomTrafficPattern::dest(int source)
+int UniformRandomTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   return RandomInt(_nodes - 1);
@@ -398,7 +400,7 @@ UniformBackgroundTrafficPattern::UniformBackgroundTrafficPattern(int nodes, vect
   }
 }
 
-int UniformBackgroundTrafficPattern::dest(int source)
+int UniformBackgroundTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
 
@@ -417,7 +419,7 @@ DiagonalTrafficPattern::DiagonalTrafficPattern(int nodes)
 
 }
 
-int DiagonalTrafficPattern::dest(int source)
+int DiagonalTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   return ((RandomInt(2) == 0) ? ((source + 1) % _nodes) : source);
@@ -429,7 +431,7 @@ AsymmetricTrafficPattern::AsymmetricTrafficPattern(int nodes)
 
 }
 
-int AsymmetricTrafficPattern::dest(int source)
+int AsymmetricTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   int const half = _nodes / 2;
@@ -446,7 +448,7 @@ Taper64TrafficPattern::Taper64TrafficPattern(int nodes)
   }
 }
 
-int Taper64TrafficPattern::dest(int source)
+int Taper64TrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   if(RandomInt(1)) {
@@ -462,7 +464,7 @@ BadPermDFlyTrafficPattern::BadPermDFlyTrafficPattern(int nodes, int k, int n)
   
 }
 
-int BadPermDFlyTrafficPattern::dest(int source)
+int BadPermDFlyTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
 
@@ -479,7 +481,7 @@ BadPermYarcTrafficPattern::BadPermYarcTrafficPattern(int nodes, int k, int n,
 
 }
 
-int BadPermYarcTrafficPattern::dest(int source)
+int BadPermYarcTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   int const row = source / (_xr * _k);
@@ -502,7 +504,7 @@ HotSpotTrafficPattern::HotSpotTrafficPattern(int nodes, vector<int> hotspots,
   }
 }
 
-int HotSpotTrafficPattern::dest(int source)
+int HotSpotTrafficPattern::dest(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
 
@@ -522,4 +524,16 @@ int HotSpotTrafficPattern::dest(int source)
   }
   assert(_rates.back() > pct);
   return _hotspots.back();
+}
+
+
+CustomizedTrafficPattern::CustomizedTrafficPattern(int nodes): TrafficPattern(nodes){
+    assert(nodes>=0);
+}
+
+int CustomizedTrafficPattern::dest(int source,int cl){
+    assert((cl>=0)&&(cl<26));
+    assert((source>=0)&&(source<_nodes));
+    int destination[26]={3,3,1,2,7,1,2,5,8,9,10,6,5,15,12,13,14,7,15,8,15,9,15,10,15,11};
+    return destination[cl];
 }

@@ -232,7 +232,6 @@ TrafficManager::TrafficManager( const Configuration &config, const vector<Networ
     }
 
     // ============ Injection VC states  ============ 
-
     _buf_states.resize(_nodes);
     _last_vc.resize(_nodes);
     _last_class.resize(_nodes);
@@ -761,18 +760,15 @@ int TrafficManager::_IssuePacket( int source, int cl )
                 result = -1;
             }
         } else {
-      
             //produce a packet
-            if(_injection_process[cl]->test(source)) {
-	
+            if(_injection_process[cl]->test(source,cl)) {
                 //coin toss to determine request type.
                 result = (RandomFloat() < _write_fraction[cl]) ? 2 : 1;
-	
                 _requestsOutstanding[source]++;
             }
         }
     } else { //normal mode
-        result = _injection_process[cl]->test(source) ? 1 : 0;
+        result = _injection_process[cl]->test(source,cl) ? 1 : 0;
         _requestsOutstanding[source]++;
     } 
     if(result != 0) {
@@ -790,7 +786,7 @@ void TrafficManager::_GeneratePacket( int source, int stype,
     int size = _GetNextPacketSize(cl); //input size 
     int pid = _cur_pid++;
     assert(_cur_pid);
-    int packet_destination = _traffic_pattern[cl]->dest(source);
+    int packet_destination = _traffic_pattern[cl]->dest(source,cl);
     bool record = false;
     bool watch = gWatchOut && (_packets_to_watch.count(pid) > 0);
     if(_use_read_write[cl]){

@@ -1,0 +1,44 @@
+// Topology
+topology = mesh;
+k = 4;
+n = 2;
+
+// Routing
+routing_function = dor;
+
+// Flow control
+num_vcs     	= 16;
+vc_buf_size 	= 16;
+
+wait_for_tail_credit = 0;
+
+// Router architecture
+vc_allocator 	 = select;
+sw_allocator 	 = separable_output_first;
+alloc_iters  	 = 10;
+credit_delay   	 = 0;
+routing_delay  	 = 1;
+vc_alloc_delay 	 = 1;
+sw_alloc_delay	 = 1;
+st_final_delay 	 = 1;
+input_speedup    = 1;
+output_speedup   = 1;
+internal_speedup = 1.0;
+
+// Traffic
+traffic          = {customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern,customizedpattern};
+
+injection_process= {customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess};
+
+packet_size  	 = 1;
+priority	 = class;
+classes 	 = 26;
+class_priority   = {4,4,4,4,3,2,2,2,9,9,9,1,1,7,8,8,8,5,6,8,7,8,7,8,7,6};
+
+
+// Simulation
+sim_type       	 = latency;
+
+//injection rate here is packet per cycle, NOT flit per cycle
+injection_rate 	 = {0.00390625,0.00390625,0.00390625,0.00390625,0.001953125,0.125,0.125,0.125,0.125,0.125,0.125,0.015625,0.015625,0.015625,0.015625,0.015625,0.015625,0.015625,0.0625,0.015625,0.015625,0.015625,0.015625,0.015625,0.015625,0.0625};
+

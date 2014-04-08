@@ -125,6 +125,8 @@ InjectionProcess * InjectionProcess::New(string const & inject, int nodes,
       }
     }
     result = new OnOffInjectionProcess(nodes, load, alpha, beta, r1, initial);
+  } else if(process_name == "customizedinjectionprocess") {
+    result=new CustomizedInjectionProcess(nodes,load);
   } else {
     cout << "Invalid injection process: " << inject << endl;
     exit(-1);
@@ -140,7 +142,7 @@ BernoulliInjectionProcess::BernoulliInjectionProcess(int nodes, double rate)
 
 }
 
-bool BernoulliInjectionProcess::test(int source)
+bool BernoulliInjectionProcess::test(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
   return (RandomFloat() < _rate);
@@ -177,7 +179,7 @@ void OnOffInjectionProcess::reset()
   _state = _initial;
 }
 
-bool OnOffInjectionProcess::test(int source)
+bool OnOffInjectionProcess::test(int source,int cl)
 {
   assert((source >= 0) && (source < _nodes));
 
@@ -187,4 +189,229 @@ bool OnOffInjectionProcess::test(int source)
 
   // generate packet
   return _state[source] && (RandomFloat() < _r1);
+}
+
+CustomizedInjectionProcess::CustomizedInjectionProcess(int nodes,double load): InjectionProcess(nodes,load){
+    assert((load>0)&&(load<1));
+    for (int i=0;i<26;i++)
+        counter[i]=0;
+    _nodes=nodes;
+};
+
+void CustomizedInjectionProcess::reset()
+{
+    for (int i=0;i<26;i++)
+        counter[i]=0;
+}
+
+bool CustomizedInjectionProcess::test(int source,int cl){
+    if ((source==1)&&(cl==0)){
+        counter[0]++;
+        if(counter[0]%256==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==2)&&(cl==1)){
+        counter[1]++;
+        if(counter[1]%256==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==3)&&(cl==2)){
+        counter[2]++;
+        if (counter[2]%256==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==3)&&(cl==3)){
+        counter[3]++;
+        if (counter[3]%256==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==3)&&(cl==4)){
+        counter[4]++;
+        if(counter[4]%512==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==4)&&(cl==5)){
+        counter[5]++;
+        if(counter[5]%8==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==4)&&(cl==6)){
+        counter[6]++;
+        if (counter[6]%8==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==4)&&(cl==7)){
+        counter[7]++;
+        if (counter[7]%8==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==4)&&(cl==8)){
+        counter[8]++;
+        if(counter[8]%8==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==4)&&(cl==9)){
+        counter[9]++;
+        if(counter[9]%8==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==4)&&(cl==10)){
+        counter[10]++;
+        if (counter[10]%8==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==5)&&(cl==11)){
+        counter[11]++;
+        if (counter[11]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==6)&&(cl==12)){
+        counter[12]++;
+        if(counter[12]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==6)&&(cl==13)){
+        counter[13]++;
+        if(counter[13]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==8)&&(cl==14)){
+        counter[14]++;
+        if (counter[14]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==9)&&(cl==15)){
+        counter[15]++;
+        if (counter[15]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==10)&&(cl==16)){
+        counter[16]++;
+        if(counter[16]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==11)&&(cl==17)){
+        counter[17]++;
+        if(counter[17]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==11)&&(cl==18)){
+        counter[18]++;
+        if (counter[18]%16==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==12)&&(cl==19)){
+        counter[19]++;
+        if (counter[19]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==12)&&(cl==20)){
+        counter[20]++;
+        if(counter[20]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==13)&&(cl==21)){
+        counter[21]++;
+        if(counter[21]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==13)&&(cl==22)){
+        counter[22]++;
+        if (counter[22]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==14)&&(cl==23)){
+        counter[23]++;
+        if (counter[23]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==14)&&(cl==24)){
+        counter[24]++;
+        if (counter[24]%64==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    if ((source==15)&&(cl==25)){
+        counter[25]++;
+        if (counter[25]%16==1){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    return false;
 }
