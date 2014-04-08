@@ -207,7 +207,7 @@ void CustomizedInjectionProcess::reset()
 bool CustomizedInjectionProcess::test(int source,int cl){
     if ((source==1)&&(cl==0)){
         counter[0]++;
-        if(counter[0]%256==1){
+        if(counter[0]%500==1){
             return true;
         }else{
             return false;
@@ -215,7 +215,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==2)&&(cl==1)){
         counter[1]++;
-        if(counter[1]%256==1){
+        if(counter[1]%500==1){
             return true;
         }else{
             return false;
@@ -223,7 +223,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==3)&&(cl==2)){
         counter[2]++;
-        if (counter[2]%256==1){
+        if (counter[2]%500==1){
             return true;
         }else{
             return false;
@@ -231,7 +231,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==3)&&(cl==3)){
         counter[3]++;
-        if (counter[3]%256==1){
+        if (counter[3]%500==1){
             return true;
         }else{
             return false;
@@ -239,7 +239,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==3)&&(cl==4)){
         counter[4]++;
-        if(counter[4]%512==1){
+        if(counter[4]%1000==1){
             return true;
         }else{
             return false;
@@ -247,7 +247,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==4)&&(cl==5)){
         counter[5]++;
-        if(counter[5]%8==1){
+        if(counter[5]%16==1){
             return true;
         }else{
             return false;
@@ -255,7 +255,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==4)&&(cl==6)){
         counter[6]++;
-        if (counter[6]%8==1){
+        if (counter[6]%16==1){
             return true;
         }else{
             return false;
@@ -263,7 +263,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==4)&&(cl==7)){
         counter[7]++;
-        if (counter[7]%8==1){
+        if (counter[7]%16==1){
             return true;
         }else{
             return false;
@@ -271,7 +271,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==4)&&(cl==8)){
         counter[8]++;
-        if(counter[8]%8==1){
+        if(counter[8]%16==1){
             return true;
         }else{
             return false;
@@ -279,7 +279,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==4)&&(cl==9)){
         counter[9]++;
-        if(counter[9]%8==1){
+        if(counter[9]%16==1){
             return true;
         }else{
             return false;
@@ -287,7 +287,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==4)&&(cl==10)){
         counter[10]++;
-        if (counter[10]%8==1){
+        if (counter[10]%16==1){
             return true;
         }else{
             return false;
@@ -295,7 +295,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==5)&&(cl==11)){
         counter[11]++;
-        if (counter[11]%64==1){
+        if (counter[11]%125==1){
             return true;
         }else{
             return false;
@@ -303,7 +303,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==6)&&(cl==12)){
         counter[12]++;
-        if(counter[12]%64==1){
+        if(counter[12]%125==1){
             return true;
         }else{
             return false;
@@ -311,7 +311,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==6)&&(cl==13)){
         counter[13]++;
-        if(counter[13]%64==1){
+        if(counter[13]%125==1){
             return true;
         }else{
             return false;
@@ -319,7 +319,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==8)&&(cl==14)){
         counter[14]++;
-        if (counter[14]%64==1){
+        if (counter[14]%125==1){
             return true;
         }else{
             return false;
@@ -327,7 +327,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==9)&&(cl==15)){
         counter[15]++;
-        if (counter[15]%64==1){
+        if (counter[15]%125==1){
             return true;
         }else{
             return false;
@@ -335,7 +335,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==10)&&(cl==16)){
         counter[16]++;
-        if(counter[16]%64==1){
+        if(counter[16]%125==1){
             return true;
         }else{
             return false;
@@ -343,7 +343,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==11)&&(cl==17)){
         counter[17]++;
-        if(counter[17]%64==1){
+        if(counter[17]%125==1){
             return true;
         }else{
             return false;
@@ -351,7 +351,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==11)&&(cl==18)){
         counter[18]++;
-        if (counter[18]%16==1){
+        if (counter[18]%32==1){
             return true;
         }else{
             return false;
@@ -359,7 +359,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==12)&&(cl==19)){
         counter[19]++;
-        if (counter[19]%64==1){
+        if (counter[19]%125==1){
             return true;
         }else{
             return false;
@@ -367,7 +367,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==12)&&(cl==20)){
         counter[20]++;
-        if(counter[20]%64==1){
+        if(counter[20]%125==1){
             return true;
         }else{
             return false;
@@ -375,7 +375,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==13)&&(cl==21)){
         counter[21]++;
-        if(counter[21]%64==1){
+        if(counter[21]%125==1){
             return true;
         }else{
             return false;
@@ -383,7 +383,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==13)&&(cl==22)){
         counter[22]++;
-        if (counter[22]%64==1){
+        if (counter[22]%125==1){
             return true;
         }else{
             return false;
@@ -391,7 +391,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==14)&&(cl==23)){
         counter[23]++;
-        if (counter[23]%64==1){
+        if (counter[23]%125==1){
             return true;
         }else{
             return false;
@@ -399,7 +399,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==14)&&(cl==24)){
         counter[24]++;
-        if (counter[24]%64==1){
+        if (counter[24]%125==1){
             return true;
         }else{
             return false;
@@ -407,7 +407,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==15)&&(cl==25)){
         counter[25]++;
-        if (counter[25]%16==1){
+        if (counter[25]%32==1){
             return true;
         }else{
             return false;

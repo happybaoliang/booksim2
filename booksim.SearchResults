@@ -1,5 +1,29 @@
----- Incorrect Matches (1 in 1 files) ----
-Trafficmanager.cpp (src):831
-        err << "Incorrect packet destination " << packet_destination
-            << " for stype " << packet_type;
-        Error( err.str( ) );
+---- _last_vc Matches (7 in 2 files) ----
+Trafficmanager.cpp (src):236
+    _last_vc.resize(_nodes);
+    _last_class.resize(_nodes);
+
+Trafficmanager.cpp (src):242
+        _last_vc[source].resize(_subnets);
+        for ( int subnet = 0; subnet < _subnets; ++subnet ) {
+            ostringstream tmp_name;
+Trafficmanager.cpp (src):253
+            _last_vc[source][subnet].resize(_classes, -1);
+        }
+    }
+Trafficmanager.cpp (src):1023
+                    assert(f->vc == _last_vc[n][subnet][last_class]);
+
+                    // if we're holding the connection, we don't need to check that class 
+Trafficmanager.cpp (src):1100
+                        int const lvc = _last_vc[n][subnet][c];
+                        int const vc =
+                            (lvc < vc_start || lvc > vc_end) ?
+Trafficmanager.cpp (src):1181
+                    _last_vc[n][subnet][c] = f->vc;
+                }
+	
+Trafficmanager.hpp (src):102
+  vector<vector<vector<int> > > _last_vc;
+
+  // ============ Routing ============ 

@@ -1098,10 +1098,7 @@ void TrafficManager::_Step( )
                     }
                     for(int i = 1; i <= vc_count; ++i) {
                         int const lvc = _last_vc[n][subnet][c];
-                        int const vc =
-                            (lvc < vc_start || lvc > vc_end) ?
-                            vc_start :
-                            (vc_start + (lvc - vc_start + i) % vc_count);
+                        int const vc = (lvc < vc_start || lvc > vc_end) ? c : (vc_start + (lvc - vc_start + i) % vc_count);
                         assert((vc >= vc_start) && (vc <= vc_end));
                         if(!dest_buf->IsAvailableFor(vc)) {
                             if(cf->watch) {

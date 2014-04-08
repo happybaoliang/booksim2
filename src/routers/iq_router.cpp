@@ -189,7 +189,7 @@ IQRouter::~IQRouter( )
     
     cout << Name() << ".switchMonitor:" << endl ; 
     cout << "Inputs=" << _inputs ;
-    cout << "Outputs=" << _outputs ;
+    cout << " Outputs=" << _outputs<<endl;
     cout << *_switchMonitor << endl ;
   }
 

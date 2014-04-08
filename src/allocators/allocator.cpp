@@ -463,12 +463,10 @@ Allocator *Allocator::NewAllocator( Module *parent, const string& name,
     a = new SelAlloc( parent, name, inputs, outputs, iters );
   } else if (alloc_name == "separable_input_first") {
     string arb_type = param_str.empty() ? (config ? config->GetStr("arb_type") : "round_robin") : param_str;
-    a = new SeparableInputFirstAllocator( parent, name, inputs, outputs,
-					  arb_type );
+    a = new SeparableInputFirstAllocator( parent, name, inputs, outputs,arb_type );
   } else if (alloc_name == "separable_output_first") {
     string arb_type = param_str.empty() ? (config ? config->GetStr("arb_type") : "round_robin") : param_str;
-    a = new SeparableOutputFirstAllocator( parent, name, inputs, outputs,
-					   arb_type );
+    a = new SeparableOutputFirstAllocator( parent, name, inputs, outputs,arb_type );
   }
 
 //==================================================
