@@ -239,7 +239,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==3)&&(cl==4)){
         counter[4]++;
-        if(counter[4]%1000==1){
+        if(counter[4]%256==1){
             return true;
         }else{
             return false;
