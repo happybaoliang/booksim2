@@ -532,8 +532,8 @@ CustomizedTrafficPattern::CustomizedTrafficPattern(int nodes): TrafficPattern(no
 }
 
 int CustomizedTrafficPattern::dest(int source,int cl){
-    assert((cl>=0)&&(cl<26));
+    assert((cl>=0)&&(cl<4));
     assert((source>=0)&&(source<_nodes));
-    int destination[26]={3,3,1,2,7,1,2,5,8,9,10,6,5,15,12,13,14,7,15,8,15,9,15,10,15,11};
+    int destination[4]={9,9,4,0};
     return destination[cl];
 }
