@@ -205,7 +205,7 @@ void CustomizedInjectionProcess::reset()
 }
 
 bool CustomizedInjectionProcess::test(int source,int cl){
-    int period=54;
+    int period=16;
     if ((source==7)&&(cl==0)){
         counter[0]++;
         if(counter[0]%period==1){
