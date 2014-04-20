@@ -1299,7 +1299,7 @@ void TrafficManager::_ClearStats( )
 
     for ( int c = 0; c < _classes; ++c ) {
 
-        _plat_stats[c]->Clear( );
+        //_plat_stats[c]->Clear( );
         _nlat_stats[c]->Clear( );
         _flat_stats[c]->Clear( );
 

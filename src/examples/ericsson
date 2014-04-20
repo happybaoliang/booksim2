@@ -16,7 +16,7 @@ wait_for_tail_credit = 0;
 vc_allocator 	 = separable_input_first;
 sw_allocator 	 = separable_input_first;
 arb_type	 = round_robin;
-credit_delay   	 = 1;
+credit_delay   	 = 0;
 routing_delay  	 = 1;
 vc_alloc_delay 	 = 1;
 sw_alloc_delay	 = 1;
@@ -46,6 +46,6 @@ sim_type       	 = latency;
 //injection rate here is packet per cycle, NOT flit per cycle
 injection_rate 	 = {0.002,0.002,0.002,0.002,0.00390625,0.064,0.064,0.064,0.064,0.064,0.064,0.008,0.008,0.008,0.008,0.008,0.008,0.008,0.032,0.008,0.008,0.008,0.008,0.008,0.008,0.008,0.032};
 
-watch_file	 = ./watchpacket.txt;
+//watch_file	 = ./watchpacket.txt;
 
-watch_out	 =-;
+//watch_out	 =-;
