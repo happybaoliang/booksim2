@@ -67,6 +67,7 @@ public:
 
 class CustomizedInjectionProcess: public InjectionProcess{
 private:
+    int offset[4];
     double _nodes;
     int counter[26];
 public:

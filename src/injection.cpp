@@ -192,23 +192,26 @@ bool OnOffInjectionProcess::test(int source,int cl)
 }
 
 CustomizedInjectionProcess::CustomizedInjectionProcess(int nodes,double load): InjectionProcess(nodes,load){
-    assert((load>0)&&(load<1));
-    for (int i=0;i<26;i++)
-        counter[i]=0;
-    _nodes=nodes;
+	for (int i=0;i<26;i++)
+		counter[i]=-1;
+	_nodes=nodes;
+	offset[0]=0;
+	offset[1]=0;
+	offset[2]=5;
+	offset[3]=16;
 };
 
 void CustomizedInjectionProcess::reset()
 {
     for (int i=0;i<26;i++)
-        counter[i]=0;
+        counter[i]=-1;
 }
 
 bool CustomizedInjectionProcess::test(int source,int cl){
-    int period=16;
+    int period=6;
     if ((source==7)&&(cl==0)){
         counter[0]++;
-        if(counter[0]%period==1){
+        if((counter[0]-offset[0])%period==0){
             return true;
         }else{
             return false;
@@ -216,7 +219,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==15)&&(cl==1)){
         counter[1]++;
-        if(counter[1]%period==1){
+        if((counter[1]-offset[1])%period==0){
             return true;
         }else{
             return false;
@@ -224,7 +227,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==14)&&(cl==2)){
         counter[2]++;
-        if (counter[2]%period==1){
+        if ((counter[2]-offset[2])%period==0){
             return true;
         }else{
             return false;
@@ -232,7 +235,7 @@ bool CustomizedInjectionProcess::test(int source,int cl){
     }
     if ((source==12)&&(cl==3)){
         counter[3]++;
-        if (counter[3]%period==1){
+        if ((counter[3]-offset[3])%period==0){
             return true;
         }else{
             return false;

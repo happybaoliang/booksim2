@@ -8,7 +8,7 @@ routing_function = dor;
 
 // Flow control
 num_vcs     	= 60;
-vc_buf_size 	= 16;
+vc_buf_size 	= 32;
 
 wait_for_tail_credit = 0;
 
@@ -30,7 +30,7 @@ traffic          = {customizedpattern,customizedpattern,customizedpattern,custom
 
 injection_process= {customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess,customizedinjectionprocess};
 
-packet_size  	 = 4;
+packet_size  	 = 1;
 priority	 = class;
 classes 	 = 4;
 class_priority   = {4,3,2,1};
@@ -44,7 +44,7 @@ sim_type       	 = latency;
 //print_activity   = 1;
 
 //injection rate here is packet per cycle, NOT flit per cycle
-injection_rate 	 = {0.0833,0.0833,0.0833,0.0833};
+injection_rate 	 = {0.0,0.0,0.0,0.0};
 
 watch_file	 = ./watchpacket.txt;
 
